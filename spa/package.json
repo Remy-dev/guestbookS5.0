@@ -1,0 +1,24 @@
+{
+  "name": "spa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@symfony/webpack-encore": "^1.0.2",
+    "babel-preset-preact": "^2.0.0",
+    "bootstrap": "^4.6.0",
+    "html-webpack-plugin": "^4.5.1",
+    "preact": "^10.5.12",
+    "preact-router": "^3.2.1",
+    "sass": "^1.32.5",
+    "sass-loader": "^10.1.1"
+  }
+}

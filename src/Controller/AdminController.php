@@ -14,7 +14,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Workflow\Registry;
 use Twig\Environment;
-
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * Class AdminController
  * @package App\Controller
@@ -22,13 +22,12 @@ use Twig\Environment;
  */
 class AdminController extends AbstractController
 {
-    private $twig;
     private $entityManager;
     private $bus;
 
-    public function __construct(Environment $twig, EntityManagerInterface $entityManager, MessageBusInterface $bus)
+    public function __construct(EntityManagerInterface $entityManager, MessageBusInterface $bus)
     {
-        $this->twig = $twig;
+
         $this->entityManager = $entityManager;
         $this->bus = $bus;
     }
@@ -53,7 +52,8 @@ class AdminController extends AbstractController
         $this->entityManager->flush();
 
         if ($accepted) {
-            $this->bus->dispatch(new CommentMessage($comment->getId()));
+            $reviewUrl = $this->generateUrl('review_comment', ['id' => $comment->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $this->bus->dispatch(new CommentMessage($comment->getId(), $reviewUrl));
         }
 
         return $this->render('admin/review.html.twig', [
