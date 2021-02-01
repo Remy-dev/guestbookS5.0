@@ -47,6 +47,7 @@ hooks:
 
         (>&2
             symfony-build
+            npm run build
         )
 
     deploy: |
