@@ -12,9 +12,8 @@ use Symfony\Component\Notifier\Message\EmailMessage;
 use Symfony\Component\Notifier\Notification\ChatNotificationInterface;
 use Symfony\Component\Notifier\Notification\EmailNotificationInterface;
 use Symfony\Component\Notifier\Notification\Notification;
-use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
-use Symfony\Component\Notifier\Recipient\RecipientInterface;
+
 
 class CommentReviewNotification extends Notification implements EmailNotificationInterface, ChatNotificationInterface
 {
@@ -57,7 +56,7 @@ class CommentReviewNotification extends Notification implements EmailNotificatio
              return null;
          }
 
-         $message = ChatMessage::fromNotification($this);
+         $message = ChatMessage::fromNotification($this)->transport($transport);
          $message->subject($this->getSubject());
          $message->options((new SlackOptions())
                  ->iconEmoji('tada')
